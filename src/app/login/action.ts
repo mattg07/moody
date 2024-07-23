@@ -62,7 +62,7 @@ export async function oAuthSignIn(provider: Provider) {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,
     options: {
-      redirectTo: `http://localhost:3000/auth/callback/`,
+      redirectTo: `https://moody-4s1kibhse-mattg07s-projects.vercel.app/auth/callback/`,
       scopes: "email", // Include any other scopes you need
       queryParams: {
         prompt: 'select_account', // Force account selection
