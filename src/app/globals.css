@@ -1,0 +1,42 @@
+@tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+  @import url('https://fonts.googleapis.com/css2?family=Baumans&display=swap');
+ .triangle {
+  position: relative;
+  width: 0;
+  height: 0;
+  border-left: var(--triangle-width) solid transparent;
+  border-right: var(--triangle-width) solid transparent;
+  border-bottom: var(--triangle-height) solid transparent;
+
+}
+
+.triangle::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: calc(-1 * var(--triangle-width));
+  width: calc(2 * var(--triangle-width));
+  height: var(--triangle-height);
+  background: linear-gradient(to right, black, rgba(255, 255, 255, 0.541));
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  -moz-box-shadow: 17px 10px 39px -1px rgba(0,0,0,0.75);
+box-shadow: 35px 0px 39px 1px rgba(0, 0, 0, 0.39);
+
+}
+
+
+@media (max-width: 768px) {
+  :root {
+    --triangle-width: 100px;
+    --triangle-height: 175px;
+  }
+}
+
+@media (min-width: 769px) {
+  :root {
+    --triangle-width: 200px;
+    --triangle-height: 345px;
+  }
+}
