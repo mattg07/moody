@@ -1,16 +1,13 @@
-"use server";
+'use server';
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-
 import { createClient } from "@/utils/supabase/server";
 import { Provider } from "@supabase/supabase-js";
 
 export async function emailLogin(formData: FormData) {
   const supabase = createClient();
 
-  // type-casting here for convenience
-  // in practice, you should validate your inputs
   const data = {
     email: formData.get("email") as string,
     password: formData.get("password") as string,
@@ -29,8 +26,6 @@ export async function emailLogin(formData: FormData) {
 export async function signup(formData: FormData) {
   const supabase = createClient();
 
-  // type-casting here for convenience
-  // in practice, you should validate your inputs
   const data = {
     email: formData.get("email") as string,
     password: formData.get("password") as string,
@@ -48,7 +43,6 @@ export async function signup(formData: FormData) {
 
 export default async function signOut() {
   const supabase = createClient();
-  const redirectUrl = `${process.env.NEXT_O}`;
   await supabase.auth.signOut();
   redirect("/login");
 }
@@ -59,10 +53,12 @@ export async function oAuthSignIn(provider: Provider) {
   }
 
   const supabase = createClient();
+  const redirectTo = process.env.NEXT_PUBLIC_OAUTH_REDIRECT_URI;
+
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,
     options: {
-      redirectTo: `https://moody-4s1kibhse-mattg07s-projects.vercel.app/auth/callback/`,
+      redirectTo: redirectTo,
       scopes: "email", // Include any other scopes you need
       queryParams: {
         prompt: 'select_account', // Force account selection
@@ -76,4 +72,3 @@ export async function oAuthSignIn(provider: Provider) {
 
   return redirect(data.url);
 }
- 
