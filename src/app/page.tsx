@@ -3,6 +3,7 @@ import { getMood, getImages, Mood } from "@/actions/actions";
 import Hero from "../components/ui/Hero";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 type MoodWithImages = Mood & { images: string[] };
 
@@ -46,7 +47,7 @@ export default function Home() {
                 <h1 className="text-xl font-bold mb-2">{mood.title}</h1>
                 <p className="mb-2">{mood.description}</p>
                 {mood.images.length > 0 && (
-                  <img
+                  <Image
                     className="w-full h-40 object-cover rounded-lg"
                     src={mood.images[0]}
                     alt={mood.title}

@@ -1,4 +1,5 @@
 import { getImages, getMoodById } from "@/actions/actions";
+import Image from "next/image";
 import DeleteButton from "@/components/deletebutton";
 import EditButton from "@/components/editbutton";
 import { createClient } from "@/utils/supabase/server";
@@ -41,7 +42,8 @@ export default async function MoodPage({ params }: Props) {
       <div className="flex items-center justify-center gap-2 flex-wrap">
         {" "}
         {pics?.map((pics) => (
-          <img key={pics.image_url} className="max-h-[500px]" src={pics.image_url}></img>
+          
+          <Image key={pics.image_url} className="max-h-[500px]" alt={mood.title} src={pics.image_url}></Image>
         ))}
       </div>
     </div>

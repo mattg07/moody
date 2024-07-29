@@ -6,6 +6,7 @@ import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/dist/server/api-utils';
 import { useRouter } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
+import Image from 'next/image';
 type Image = {
   id: string;
   image_url: string;
@@ -130,7 +131,7 @@ export default function EditPage({ params }: Props) {
       <div className="flex items-center justify-center gap-2 flex-wrap">
         {pics.map((pic) => (
           <div key={pic.id} className="mt-8">
-            <img className="max-h-[500px]" src={pic.image_url} alt="Mood Image" />
+            <Image className="max-h-[500px]" src={pic.image_url} alt="Mood Image" />
             <Button className="bg-white text-red-700 rounded-md mt-1 w-20" onClick={() => handleDelete(pic.image_url)}>
               Delete
             </Button>
